@@ -5,6 +5,7 @@
         v-model="languages"
         :rules="languagesRules"
         ref="group"
+        validate-mode="form-silent"
         @validation:status="(status) => (languagesStatus = status)"
       >
         <div

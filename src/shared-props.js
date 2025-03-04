@@ -70,16 +70,10 @@ const sharedValidationProps = (component, options) => {
 
   let props = {};
 
-  if (options.validateOn) {
-    props.validateOn = {
-      type: String,
-      default: options.validateOn || "blur",
-    };
-  }
   if (options.validateMode) {
     props.validateMode = {
       type: String,
-      default: options.validateMode || "silent",
+      default: options.validateMode || "blur-silent",
     };
   }
 
@@ -88,10 +82,6 @@ const sharedValidationProps = (component, options) => {
     rules: {
       type: Object,
       default: [],
-    },
-    validationState: {
-      type: String,
-      default: null,
     },
   };
 };

@@ -87,9 +87,9 @@
   </div>
 
   <v-form-text
-    v-if="!noMessages && Object.keys(validation.messages.value).length"
-    :messages="validation.messages.value"
-    :state="validation.state.value"
+    v-if="!noMessages && Object.keys(messages).length"
+    :messages="messages"
+    :state="state"
     :single-line-message="singleLineMessage"
     v-bind="formText"
     data-testid="error-messages"
@@ -137,8 +137,7 @@ const props = defineProps({
   ]),
   ...sharedFormProps("input", { icon: true, clearable: true }),
   ...sharedValidationProps("input", {
-    validateOn: "blur",
-    validateMode: "silent",
+    validateMode: "blur-silent",
   }),
   modelValue: {
     type: [String, Number, Array, Boolean, Number],
@@ -261,41 +260,45 @@ let form = inject("_form", {});
 
 // validate
 
-let emitValidationStatus = (status, state, messages) => {
+let emitValidationStatus = () => {
   emit("validation:status", status.value);
   emit("validation:state", state.value);
   emit("validation:messages", messages.value);
 };
 
-let resetInput = () => {
-  localModel.value = "";
-};
-
-let externalState = toRef(props, "validationState");
-
 let externalModel = toRef(props, "externalModel");
 
-let { rules, validateOn, validateMode } = props;
+let { rules, validateMode } = props;
 
 let currentValidationModel =
   externalModel.value !== undefined ? externalModel : localModel;
 
-let validation = useValidation({
-  form,
-  value: currentValidationModel,
-  rules,
-  options: {
-    validateOn,
-    validateMode,
-  },
-  externalState,
-  onUpdate: emitValidationStatus,
-  onReset: resetInput,
-});
+let status = ref({})
+let messages = ref({})
+let state = ref("")
 
-watch(validation.state, (value) => {
+let validation = useValidation({
+  rules,
+  mode: validateMode,
+},
+(res) => {
+  status.value = res.status
+  messages.value = res.messages
+  state.value = res.state
+  emitValidationStatus()
+})
+
+watch(currentValidationModel, (value) => {
+  validation.updateValue(value)
+}, { immediate: true })
+
+watch(state, (value) => {
   setState(value)
 })
+
+if (form.addToForm) {
+  form.addToForm({...validation, status, messages, state})
+}
 
 // handle template events
 

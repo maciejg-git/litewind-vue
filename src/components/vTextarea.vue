@@ -31,9 +31,9 @@
   </div>
 
   <v-form-text
-    v-if="!noMessages && Object.keys(validation.messages.value).length"
-    :messages="validation.messages.value"
-    :state="validation.state.value"
+    v-if="!noMessages && Object.keys(messages).length"
+    :messages="messages"
+    :state="state"
     :single-line-message="singleLineMessage"
     v-bind="formText"
     data-testid="error-messages"
@@ -57,7 +57,7 @@ export default {
 </script>
 
 <script setup>
-import { computed, toRef, inject, useAttrs, nextTick, watch } from "vue";
+import { computed, toRef, inject, useAttrs, nextTick, watch, ref } from "vue";
 import useTailwindStyles from "./composition/use-tailwind-styles"
 import useLocalModel from "./composition/use-local-model";
 import useUid from "./composition/use-uid";
@@ -76,8 +76,7 @@ const props = defineProps({
   ...sharedModProps("textarea", ["Textarea", "Label"]),
   ...sharedFormProps("textarea"),
   ...sharedValidationProps("textarea", {
-    validateOn: "blur",
-    validateMode: "silent",
+    validateMode: "blur-silent",
   }),
   modelValue: {
     type: String,
@@ -151,36 +150,40 @@ let form = inject("_form", {});
 
 // validate
 
-let emitValidationStatus = (status, state, messages) => {
+let emitValidationStatus = () => {
   emit("validation:status", status.value);
   emit("validation:state", state.value);
   emit("validation:messages", messages.value);
 };
 
-let resetInput = () => {
-  localModel.value = "";
-};
+let { rules, validateMode } = props;
 
-let externalState = toRef(props, "validationState");
-
-let { rules, validateOn, validateMode } = props;
+let status = ref({})
+let messages = ref({})
+let state = ref("")
 
 let validation = useValidation({
-  form,
-  value: localModel,
   rules,
-  options: {
-    validateOn,
-    validateMode,
-  },
-  externalState,
-  onUpdate: emitValidationStatus,
-  onReset: resetInput,
-});
+  mode: validateMode,
+},
+(res) => {
+  status.value = res.status
+  messages.value = res.messages
+  state.value = res.state
+  emitValidationStatus()
+})
 
-watch(validation.state, (value) => {
+watch(localModel, (value) => {
+  validation.updateValue(value)
+}, { immediate: true })
+
+watch(state, (value) => {
   setState(value)
 })
+
+if (form.addToForm) {
+  form.addToForm({...validation, status, messages, state})
+}
 
 // handle template events
 

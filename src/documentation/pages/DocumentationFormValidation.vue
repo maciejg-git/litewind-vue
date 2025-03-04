@@ -145,25 +145,25 @@
     </div>
   </section>
 
-  <section>
-    <h4 id="ExampleValidationSingleLineMessage">Example - single line messages</h4>
-    <p>
-      In order to display single line validation message use <code class="code-text">single-line-message</code> prop.
-    </p>
-    <div class="example">
-      <example name="ExampleValidationSingleLineMessage"></example>
-    </div>
-  </section>
+  <!-- <section> -->
+  <!--   <h4 id="ExampleValidationSingleLineMessage">Example - single line messages</h4> -->
+  <!--   <p> -->
+  <!--     In order to display single line validation message use <code class="code-text">single-line-message</code> prop. -->
+  <!--   </p> -->
+  <!--   <div class="example"> -->
+  <!--     <example name="ExampleValidationSingleLineMessage"></example> -->
+  <!--   </div> -->
+  <!-- </section> -->
 
-  <section>
-    <h4 id="ExampleValidationMessageSlot">Example - message slot</h4>
-    <p>
-      In order to customize validation messages <code class="code-text">message</code> slot can be used.
-    </p>
-    <div class="example">
-      <example name="ExampleValidationMessageSlot"></example>
-    </div>
-  </section>
+  <!-- <section> -->
+  <!--   <h4 id="ExampleValidationMessageSlot">Example - message slot</h4> -->
+  <!--   <p> -->
+  <!--     In order to customize validation messages <code class="code-text">message</code> slot can be used. -->
+  <!--   </p> -->
+  <!--   <div class="example"> -->
+  <!--     <example name="ExampleValidationMessageSlot"></example> -->
+  <!--   </div> -->
+  <!-- </section> -->
 </template>
 
 <script setup>

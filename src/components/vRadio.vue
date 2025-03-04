@@ -31,7 +31,7 @@ export default {
 </script>
 
 <script setup>
-import { inject, useAttrs, toRef, watch } from "vue";
+import { inject, useAttrs, toRef, watch, ref } from "vue";
 import useTailwindStyles from "./composition/use-tailwind-styles"
 import useLocalModel from "./composition/use-local-model";
 import useUid from "./composition/use-uid";
@@ -48,7 +48,7 @@ const props = defineProps({
   ...sharedModProps("radio", ["Radio", "Label"]),
   ...sharedFormProps("radio"),
   ...sharedValidationProps("radio", {
-    validateMode: "silent",
+    validateMode: "blur-silent",
   }),
   modelValue: {
     type: [Array, Boolean, String],
@@ -100,39 +100,45 @@ let form = !isInGroup && inject("_form", {});
 
 // validation
 
-let emitValidationStatus = (status, state, messages) => {
+let emitValidationStatus = () => {
   emit("validation:status", status.value);
   emit("validation:state", state.value);
   emit("validation:messages", messages.value);
 };
 
-let resetInput = () => {
-  localModel.value = "";
-};
-
-let externalState = toRef(props, "validationState");
-
 let { rules, validateMode } = props;
 
-// try to inject checkbox group validation or fallback to checkbox validation
-let validation =
-  inject("_radio-group-validation", null) ||
-  useValidation({
-    form,
-    value: localModel,
-    rules,
-    options: {
-      validateOn: "form",
-      validateMode,
-    },
-    externalState,
-    onUpdate: emitValidationStatus,
-    onReset: resetInput,
-  });
+let status = ref({})
+let messages = ref({})
+let state = inject("_validation-state", null) || ref("")
 
-watch(validation.state, (value) => {
+// try to inject checkbox group validation or fallback to checkbox validation
+let validation = inject("_radio-group-validation", null)
+
+if (!validation) {
+  validation = useValidation({
+    rules,
+    mode: validateMode,
+  },
+  (res) => {
+    status.value = res.status
+    messages.value = res.messages
+    state.value = res.state
+    emitValidationStatus()
+  })
+
+  watch(localModel, (value) => {
+    validation.updateValue(value)
+  }, { immediate: true })
+}
+
+watch(state, (value) => {
   setState(value)
 })
+
+if (form.addToForm) {
+  form.addToForm({...validation, status, messages, state})
+}
 
 // handle template events
 

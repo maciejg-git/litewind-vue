@@ -8,8 +8,7 @@
         class="w-full"
         v-model="username"
         :rules="rules"
-        validate-on="blur"
-        validate-mode="silent"
+        validate-mode="blur-silent"
         @validation:status="(data) => (usernameStatus = data)"
       ></v-input>
     </div>
@@ -36,8 +35,7 @@
         class="w-full"
         v-model="username2"
         :rules="rules"
-        validate-on="blur"
-        validate-mode="eager"
+        validate-mode="blur-eager"
         @validation:status="(data) => (usernameStatus2 = data)"
       ></v-input>
     </div>
@@ -64,8 +62,7 @@
         class="w-full"
         v-model="username4"
         :rules="rules"
-        validate-on="immediate"
-        validate-mode="eager"
+        validate-mode="immediate-eager"
         @validation:status="(data) => (usernameStatus4 = data)"
       ></v-input>
     </div>
