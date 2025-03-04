@@ -19,7 +19,7 @@ let dropdown = {
         dark:text-text-300
         dark:focus:text-white
         dark:hover:bg-dark-700
-        dark:focus:bg-primary-500;
+        dark:focus:bg-primary-500
       `,
       active: `
         text-white
