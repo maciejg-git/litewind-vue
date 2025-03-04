@@ -86,26 +86,6 @@
             v-model="example.isLoading"
           ></v-select-prop>
         </div>
-        <div>
-          <label for="validation-state">validation state:</label>
-          <v-select
-            id="validation-state"
-            v-model="example.validationState"
-            inline
-            :items="[
-              {
-                text: 'null (component controlled)',
-                value: null,
-              },
-              {
-                text: 'empty string',
-                value: '',
-              },
-              'valid',
-              'invalid',
-            ]"
-          ></v-select>
-        </div>
       </div>
     </v-tab>
     <v-tab>
@@ -137,7 +117,6 @@ let example = reactive({
   customClearable: false,
   useLoader: false,
   isLoading: false,
-  validationState: "",
 });
 
 let events = ref([]);

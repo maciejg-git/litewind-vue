@@ -51,26 +51,6 @@
             v-model="example.label"
           ></v-input>
         </div>
-        <div>
-          <label for="validation-state">validation state:</label>
-          <v-select
-            id="validation-state"
-            v-model="example.validationState"
-            inline
-            :items="[
-              {
-                text: 'component controlled (null)',
-                value: null,
-              },
-              {
-                text: 'empty string',
-                value: '',
-              },
-              'valid',
-              'invalid',
-            ]"
-          ></v-select>
-        </div>
       </div>
     </v-tab>
     <v-tab>
@@ -97,7 +77,6 @@ import { ref, reactive } from "vue";
 let example = reactive({
   model: "",
   label: "Textarea label",
-  validationState: "",
 });
 
 let events = ref([]);
