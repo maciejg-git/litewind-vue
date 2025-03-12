@@ -19,7 +19,7 @@ export let validationMessages = {
 
 export let globalValidators = {
   required: (value, isRequired) => {
-    if (typeof value === "boolean") return value
+    if (typeof value === "boolean") return value || validationMessages.required
     if (Array.isArray(value)) return !!value.length || validationMessages.required;
     return !!value && !!value.trim() || validationMessages.required;
   },
