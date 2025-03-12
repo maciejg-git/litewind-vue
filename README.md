@@ -1,4 +1,4 @@
-# Vue-litewind
+# Litewind-vue
 
 UI components collection for Vue 3 applications. 
 
