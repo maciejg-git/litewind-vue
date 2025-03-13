@@ -1,5 +1,9 @@
 # Litewind-vue
 
+![GitHub License](https://img.shields.io/github/license/maciejg-git/litewind-vue)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/maciejg-git/litewind-vue)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/719ffead-b2d9-43a6-99e0-6820d42b07bf/deploy-status)](https://app.netlify.com/sites/vue-litewind/deploys)
+
 UI components collection for Vue 3 applications. 
 
 Vue-litewind uses **Tailwind CSS** as a CSS framework.
