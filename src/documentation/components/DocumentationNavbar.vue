@@ -23,12 +23,16 @@
 
     <!-- logo -->
 
-    <span class="text-lg font-bold">Vue-Litewind</span>
+    <span class="text-lg font-bold">
+      <a href="/documentation/installation">
+        Litewind-vue
+      </a>
+    </span>
 
     <!-- nav menu -->
 
     <div class="ml-10 inline-block font-semibold">
-      <a href="/documentation/installation">Docs</a>
+      <a href="/documentation/installation" class="py-1">Docs</a>
     </div>
 
     <!-- github -->
@@ -73,10 +77,10 @@ let emit = defineEmits(["update:dark-mode"]);
 
 <style scoped>
 a.active {
-  @apply inline-block py-1 pl-4 pr-4 text-black dark:text-white;
+  @apply inline-block text-black dark:text-white;
 }
 a {
-  @apply inline-block py-1 pl-2 pr-4;
+  @apply inline-block;
 }
 a:hover {
   @apply text-black dark:text-white;

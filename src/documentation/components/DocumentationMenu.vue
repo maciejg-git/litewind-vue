@@ -2,12 +2,7 @@
   <!-- general -->
 
   <h6>
-    <router-link
-      to="/documentation/components"
-      class="transition-all"
-    >
-      Introduction
-    </router-link>
+    Introduction
   </h6>
   <ul class="list-unstyled">
     <li>
@@ -33,12 +28,7 @@
   <!-- components -->
 
   <h6>
-    <router-link
-      to="/documentation/components"
-      class="transition-all"
-    >
-      Components
-    </router-link>
+    Components
   </h6>
   <ul class="list-unstyled">
     <li
@@ -58,12 +48,7 @@
   <!-- form components -->
 
   <h6>
-    <router-link
-      to="/documentation/form-components"
-      class="transition-all"
-    >
-      Form Components
-    </router-link>
+    Form Components
   </h6>
   <ul class="list-unstyled">
     <li
@@ -91,12 +76,7 @@
 
   <!-- directives -->
 
-  <router-link
-    to="/documentation/form-components"
-    class="transition-all"
-  >
-    <h6 class="mt-4">Directives</h6>
-  </router-link>
+  <h6>Directives</h6>
   <ul class="list-unstyled">
     <li>
       <router-link
@@ -126,7 +106,7 @@ h5 {
   @apply mt-4 text-xl font-semibold;
 }
 h6 {
-  @apply mb-4 mt-6 text-lg font-semibold;
+  @apply mb-4 mt-6 text-lg font-semibold pl-2 py-1 pl-2 pr-4;
 }
 
 a.active {
