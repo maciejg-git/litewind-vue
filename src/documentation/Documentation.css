@@ -11,6 +11,11 @@ h6 {
   @apply text-lg font-semibold dark:text-text-200 scroll-mt-20 mt-10 mb-6;
 }
 
+html {
+  font-family: "Inter", system-ui, sans-serif;
+  font-optical-sizing: auto;
+}
+
 section {
   @apply my-10
 }

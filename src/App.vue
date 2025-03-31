@@ -8,7 +8,7 @@ import * as styles from "./styles/components"
 
 export default {
   setup() {
-    document.title = "Vue-Litewind documentation"
+    document.title = "Litewind-vue documentation"
 
     provide("mods", styles)
   },
